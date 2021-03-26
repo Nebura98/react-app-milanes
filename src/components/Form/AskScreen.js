@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const CheckOutForm = () => {
+export const AskScreen = () => {
 
     const sentEmail = () => {
 

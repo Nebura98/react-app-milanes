@@ -10,10 +10,10 @@ export const SideBar = () => {
     let key = 1;
 
     return (
-        <aside className=" navbar-expand-md col-12 col-md-4 col-lg-3 col-xl-2 p-2 mt-3">
+        <aside className=" navbar-expand-md col-12 col-md-4 col-lg-3 col-xl-2 p-2 ">
             <div className="mx-auto">
                 <button 
-                    className="navbar-toggler btn mb-2" 
+                    className="btn btn-secondary bg-secondary navbar-toggler form-control mb-2" 
                     data-bs-toggle="collapse" 
                     data-bs-target="#sideBarMenuFilter" 
                     aria-controls="navbarSupportedContent" 
@@ -23,7 +23,7 @@ export const SideBar = () => {
                     Filtros
                 </button>
                 <div className="collapse navbar-collapse" id="sideBarMenuFilter">
-                    <div className="">
+                    <div className="form-control">
                         <section>
                             <h5 className="card-title">Marcas</h5>
                             <ul className="p-2 overflow-auto" style={{maxHeight:250}}>

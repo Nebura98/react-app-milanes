@@ -31,7 +31,7 @@ export const CartItem = ({ name, urlImg, price, measure, amount }) => {
                     </div>
                     <div className="col-sm-8">
                         <div className="card-body">
-                            <p className="card-title overflow-hidden fw-bold">{ nameItem }</p>
+                            <p className="card-title overflow-hidden fw-bold ">{ nameItem }</p>
                             <p className="">{ priceItem + '/' + measureItem}</p>
                             <input 
                                 className="form-control" 
