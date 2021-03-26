@@ -1,0 +1,12 @@
+@import 'components/parallax';
+@import 'components/card';
+
+$theme-colors:(
+    "primary":#db3030,
+    "secondary":#2c3d60,
+    "success":#b74242,
+    "warning":#e45826,
+    "light":#f6f6f6 
+);
+
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
