@@ -1,26 +1,24 @@
 import React from 'react';
 import { useForm } from '../../hooks/useForm';
 
-export const CartItem = ({ name, urlImg, price, measure, amount }) => {
-    
-    const [  formValues, handleInputChange  ] = useForm(
-        { 
-            nameItem: name,
-            urlImgItem: urlImg, 
-            priceItem: price, 
-            measureItem: measure, 
-            amountItem: amount
-        });
+export const CartItem = ({ name, urlImg, price, measure, amount, handleAddProduct, handleDeleteProduct}) => {
 
-
+    const [  formValues, handleInputChange  ] = useForm (
+                                                            { 
+                                                                nameItem: name,
+                                                                urlImgItem: urlImg, 
+                                                                priceItem: price, 
+                                                                measureItem: measure, 
+                                                                amountItem: amount
+                                                            }
+                                                        );
 
     const { nameItem, urlImgItem, priceItem, measureItem, amountItem } = formValues; 
     
-    
-    const handleDeleteCartItem = () => {
-        let cartItems = (JSON.parse(localStorage.getItem('MilanesKeyCart'))); 
-        cartItems = cartItems.filter(( item ) => item.name !== nameItem);
-        localStorage.setItem('MilanesKeyCart',JSON.stringify(cartItems));
+
+    const updateMeasure = (e) => {
+        handleInputChange(e);
+        // handleAddProduct(form);
     }
     return (
         <li className="list-group-item">
@@ -38,13 +36,13 @@ export const CartItem = ({ name, urlImg, price, measure, amount }) => {
                                 type="number"
                                 name="amountItem" 
                                 value={ amountItem }
-                                onChange={ handleInputChange }
+                                onChange={ updateMeasure }
                             />
                         </div>
                     </div>
                     <button 
                         className="btn btn-warning my-1"
-                        onClick={ handleDeleteCartItem }
+                        onClick={ () => handleDeleteProduct( nameItem ) }
                     >
                             Eliminar producto
                     </button>

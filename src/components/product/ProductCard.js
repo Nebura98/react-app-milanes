@@ -1,44 +1,48 @@
-import React       from 'react';
-import { Link }    from 'react-router-dom';
-import { useForm } from '../../hooks/useForm';
-import { TagList } from '../tagsProduct/TagList';
+import React, { useEffect, useReducer } from 'react';
+import { Link }              from 'react-router-dom';
+import { useForm }           from '../../hooks/useForm';
+import { productReducer }    from '../../listProducts/productReducer';
+import { types }             from '../../types/types';
+import { TagList }           from '../tagsProduct/TagList';
+
+
+const init = () => {
+    return JSON.parse(localStorage.getItem( 'MilanesKeyCart' )) || [];
+}
 
 export const ProductCard = ({ nombre, url, precio, unidad }) => {
 
+    const [ cart , dispatch ] = useReducer( productReducer , [] , init );
+
+    useEffect( () => {
+        localStorage.setItem( 'MilanesKeyCart', JSON.stringify( cart ) );
+    }, [cart]);
+
     const [  formValues, handleInputChange  ] = useForm(
-        { 
-            name:nombre,
-            urlImg:url, 
-            price:precio, 
-            measure:unidad, 
-            amount:1 
-        });
+                                                            { 
+                                                                name:nombre,
+                                                                urlImg:url, 
+                                                                price:precio, 
+                                                                measure:unidad, 
+                                                                amount:1 
+                                                            }
+                                                        );
 
 
     const { name, urlImg, price, measure, amount } = formValues;
 
-    const handleAddProduct = (e) => {
-        e.preventDefault();
-        if ( localStorage.getItem('MilanesKeyCart') !== null && isAlreadyIn() ){
-            let cartObj = JSON.parse(localStorage.getItem('MilanesKeyCart')); 
-            cartObj.push((formValues));
-            localStorage.setItem('MilanesKeyCart',JSON.stringify(cartObj));
-        } else if (localStorage.getItem('MilanesKeyCart') === null){
-            localStorage.setItem('MilanesKeyCart',JSON.stringify([formValues]));
+    const handleAddProduct = () => {
+        try {
+            dispatch ({
+                type: types.add,
+                payload : formValues
+            });            
+        } catch (error) {
+            
         }
-    }
 
-    const isAlreadyIn = () => {
-        let cartObj = JSON.parse(localStorage.getItem('MilanesKeyCart'));
-        const nombre = name.toLowerCase();
-        for (let {name} of cartObj) {
-            if ( name.toLowerCase() === nombre){
-                return false;
-            }
-        }
-        return true;
     }
-
+    
     return (
         <div className="col-12 col-md-6 col-lg-4 col-xl-3 col-xxl-3">
             <div className="card">
@@ -59,25 +63,23 @@ export const ProductCard = ({ nombre, url, precio, unidad }) => {
                     </div>    
                     <div className="">
                         <h4 className="card-title">${ price }<small className="muted">/{ measure }</small></h4>
-                        <form onSubmit={ handleAddProduct }>
-                            <div className="input-group">
-                                <input 
-                                    type="number" 
-                                    name="amount"
-                                    className="form-control" 
-                                    onChange={ handleInputChange }
-                                    value={ amount }
-                                    aria-describedby="btnAgregar"
-                                />
-                                <button
-                                    name="btnAgregar"
-                                    className="btn btn-primary text-white"
-                                    type="submit"
-                                >
-                                    Agregar
-                                </button>
-                            </div>
-                        </form>
+                        <div className="input-group">
+                            <input 
+                                type="number" 
+                                name="amount"
+                                className="form-control" 
+                                onChange={ handleInputChange }
+                                value={ amount }
+                                aria-describedby="btnAgregar"
+                            />
+                            <button
+                                name="btnAgregar"
+                                className="btn btn-primary text-white"
+                                onClick={ handleAddProduct }
+                            >
+                                Agregar
+                            </button>
+                        </div>
                     </div>
                 </div>                    
             </div>

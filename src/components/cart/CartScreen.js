@@ -1,10 +1,24 @@
-import React, { useEffect, useState }   from 'react';
-import { useForm } from '../../hooks/useForm';
-import { CartItem } from './CartItem';
+import React, { useEffect, useReducer }   from 'react';
+import { useForm }        from '../../hooks/useForm';
+import { CartItem }       from './CartItem';
+import { productReducer } from '../../listProducts/productReducer';
+import { types }          from '../../types/types';
+
+import swal from 'sweetalert';
+
+const init = () => {
+    return JSON.parse(localStorage.getItem( 'MilanesKeyCart' )) || [];
+}
 
 export const CartScreen = () => {
 
     document.title="Carrito";
+    
+    const [ cart , dispatch ] = useReducer( productReducer , [] , init );
+
+    useEffect( () => {
+        localStorage.setItem( 'MilanesKeyCart', JSON.stringify( cart ) );
+    }, [cart]);
 
     const [  formValues, handleInputChange ]  = useForm({
         name:'',
@@ -13,28 +27,42 @@ export const CartScreen = () => {
         address:''
     });
 
-    const [Items, setItems] = useState(JSON.parse(localStorage.getItem('MilanesKeyCart'))|| []);
-
     const { name, email, phoneNumber, address } = formValues;
 
-    // const handleDeleteCartItem = ( e ) => {
-    //     setItems(JSON.parse(localStorage.getItem('MilanesKeyCart'))); 
-    //     setItems(setItems.filter( ( item ) => item.nombre !== e.nombre));
-    //     localStorage.setItem('MilanesKeyCart',JSON.stringify(setItems));
-    // }
+    const handleAddProduct = ( item ) => {
+        dispatch ({
+            type: types.add,
+            payload : item
+        });
+    }
 
-    useEffect(() => {
-        setItems(JSON.parse(localStorage.getItem('MilanesKeyCart')) || []);
-    },[])
+    const handleDeleteProduct = ( name ) => {
+        dispatch ({
+            type: types.delete,
+            payload : name
+        });
+    }
 
-    const emptyCart = (e) => {
-        e.preventDefault();
-        setItems( localStorage.removeItem('MilanesKeyCart'))
-        setItems([]);
+    const resetCart = () => {
+        swal({
+            title: "¿Estas seguro?",
+            text: "¿Deseas vacíar tu carrito?",
+            icon: "warning",
+            buttons: ["Cancelar", "Proceder"]
+          })
+          .then(willDelete => {
+            if (willDelete) {
+              swal("¡La operación se ejecuto exitosamente!", "Tu carrito ha sido vaciado exitosamente", "success");
+              dispatch ({
+                type: types.reset,
+                payload : ''
+            });
+            }
+          });
     }
 
     const sendEmail = () => {
-        alert(JSON.stringify(Items));
+        alert(JSON.stringify(cart));
     }
 
     return (
@@ -98,7 +126,7 @@ export const CartScreen = () => {
 
                     <ul className="list-group list-group-flush">
                         {
-                            ( Items=== undefined || Items.length === 0) 
+                            ( cart=== undefined || cart.length === 0) 
                                 ?
                                     <div className= "alert alert-danger mx-4 mb-2 text-center">
                                         No se han agregado producto.
@@ -109,7 +137,7 @@ export const CartScreen = () => {
                                         <h3>Lista de productos</h3>
                                         <button
                                             className="btn btn-outline-warning form-control"
-                                            onClick={ emptyCart }
+                                            onClick={ resetCart }
                                         >
                                             Vacíar listado
                                         </button>
@@ -118,10 +146,12 @@ export const CartScreen = () => {
                         }
                         
                         {
-                            Items.map( item => (
+                            cart.map( item => (
                                 <CartItem
-                                    key={item.name} 
-                                    {...item}
+                                    key={item.name}
+                                    { ...item} 
+                                    handleAddProduct = { handleAddProduct } 
+                                    handleDeleteProduct = { handleDeleteProduct }
                                 />
                             ))
                         }

@@ -1,5 +1,5 @@
 {
-  "homepage": "https://nebura98.github.io/react-app-milanes/",  
+  "homepage": "https://nebura98.github.io/react-app-milanes/",
   "name": "milanes-project",
   "version": "0.1.0",
   "private": true,
@@ -14,6 +14,7 @@
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "sweetalert": "^2.1.2",
     "validator": "^13.5.2",
     "web-vitals": "^1.1.0"
   },
@@ -24,8 +25,6 @@
     "eject": "react-scripts eject",
     "predploy": "npm run build",
     "deploy": "gh-pages -d build"
-
-
   },
   "eslintConfig": {
     "extends": [
