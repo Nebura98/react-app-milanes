@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/react-app-milanes/static/css/main.f2b5c94d.chunk.css",
-    "main.js": "/react-app-milanes/static/js/main.d9a11b20.chunk.js",
-    "main.js.map": "/react-app-milanes/static/js/main.d9a11b20.chunk.js.map",
+    "main.js": "/react-app-milanes/static/js/main.e88fb7bc.chunk.js",
+    "main.js.map": "/react-app-milanes/static/js/main.e88fb7bc.chunk.js.map",
     "runtime-main.js": "/react-app-milanes/static/js/runtime-main.c195c913.js",
     "runtime-main.js.map": "/react-app-milanes/static/js/runtime-main.c195c913.js.map",
     "static/css/2.2f9ba80b.chunk.css": "/react-app-milanes/static/css/2.2f9ba80b.chunk.css",
-    "static/js/2.558edb39.chunk.js": "/react-app-milanes/static/js/2.558edb39.chunk.js",
-    "static/js/2.558edb39.chunk.js.map": "/react-app-milanes/static/js/2.558edb39.chunk.js.map",
+    "static/js/2.1026474f.chunk.js": "/react-app-milanes/static/js/2.1026474f.chunk.js",
+    "static/js/2.1026474f.chunk.js.map": "/react-app-milanes/static/js/2.1026474f.chunk.js.map",
     "index.html": "/react-app-milanes/index.html",
     "static/css/2.2f9ba80b.chunk.css.map": "/react-app-milanes/static/css/2.2f9ba80b.chunk.css.map",
     "static/css/main.f2b5c94d.chunk.css.map": "/react-app-milanes/static/css/main.f2b5c94d.chunk.css.map",
-    "static/js/2.558edb39.chunk.js.LICENSE.txt": "/react-app-milanes/static/js/2.558edb39.chunk.js.LICENSE.txt",
+    "static/js/2.1026474f.chunk.js.LICENSE.txt": "/react-app-milanes/static/js/2.1026474f.chunk.js.LICENSE.txt",
     "static/media/styles.scss": "/react-app-milanes/static/media/Canas.b9a9f1f7.jpg",
     "static/media/undraw_Mailbox_re_dvds.7604745c.svg": "/react-app-milanes/static/media/undraw_Mailbox_re_dvds.7604745c.svg",
     "static/media/undraw_Online_calendar_re_wk3t.71b5ad4b.svg": "/react-app-milanes/static/media/undraw_Online_calendar_re_wk3t.71b5ad4b.svg",
@@ -21,8 +21,8 @@
   "entrypoints": [
     "static/js/runtime-main.c195c913.js",
     "static/css/2.2f9ba80b.chunk.css",
-    "static/js/2.558edb39.chunk.js",
+    "static/js/2.1026474f.chunk.js",
     "static/css/main.f2b5c94d.chunk.css",
-    "static/js/main.d9a11b20.chunk.js"
+    "static/js/main.e88fb7bc.chunk.js"
   ]
 }
